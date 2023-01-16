@@ -34,19 +34,8 @@
     </div>
 @endsection
 @section('javascript')
-    $(function() {
-        $('.delete').click(function(){
-            $.ajax({
-                method: "DELETE",
-                url: "http://shop.test/users/" + $(this).data("id")
-            //    data: { id: $(this).data("id")}
-            })
-            .done(function( response ) {
-                window.location.reload();
-            })
-            .fail(function( response ) {
-                alert( "ERROR");
-            });
-        });
-    });
+    const deleteUrl= "{{url('users')}}/";
+@endsection
+@section('js-files')
+    @vite(['resources/sass/app.scss', 'resources/js/delete.js'])
 @endsection
