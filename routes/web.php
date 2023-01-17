@@ -19,6 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name(name: 'products.index')->middleware('auth');
+Route::get('/products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name(name: 'products.create')->middleware('auth');
+Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name(name: 'products.show')->middleware('auth');
+
+Route::post('/products', [\App\Http\Controllers\ProductController::class, 'store'])->name(name: 'products.store')->middleware('auth');
+Route::get('/products/edit/{product}', [\App\Http\Controllers\ProductController::class, 'edit'])->name(name: 'products.edit')->middleware('auth');
+Route::post('/products/{product}', [\App\Http\Controllers\ProductController::class, 'update'])->name(name: 'products.update')->middleware('auth');
+Route::delete('/products/{product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name(name: 'products.destroy')->middleware('auth');
+
+
 Route::get('/users/list', [\App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
 Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->middleware('auth');
 Route::get('/hello', [\App\Http\Controllers\HelloWorldController::class, 'show']);
