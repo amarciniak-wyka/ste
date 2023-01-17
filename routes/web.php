@@ -1,6 +1,6 @@
 <?php
 
-use \App\Http\Controllers\HelloWorldController;
+use \App\Http\Controllers\WelcomeController2;
 use \App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
 Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name(name: 'products.index')->middleware('auth');
 Route::get('/products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name(name: 'products.create')->middleware('auth');
@@ -31,7 +30,7 @@ Route::delete('/products/{product}', [\App\Http\Controllers\ProductController::c
 
 Route::get('/users/list', [\App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
 Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->middleware('auth');
-Route::get('/hello', [\App\Http\Controllers\HelloWorldController::class, 'show']);
+Route::get('/hello', [\App\Http\Controllers\WelcomeController2::class, 'show']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
