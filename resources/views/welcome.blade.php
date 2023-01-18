@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-            </div><div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+            </div><form class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
                 <h3 class="mt-0 mb-5"> Produkty <span class="text-primary">{{count($products)}}</span> </h3>
                 <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
                 <div class="mt-2 mb-2 pl-2">
@@ -160,7 +160,7 @@
                 <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
                 <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
                 <a href="#" class="btn btn-lg btn-block btn-primary mt-5">Update Results</a>
-            </div>
+            </form>
 
         </div>
     </div>
