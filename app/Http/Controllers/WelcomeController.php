@@ -17,13 +17,36 @@ class WelcomeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @param Request $request
+     * @return View|JsonResponse
      */
-    public function index(): View
+    public function index(Request $request): View|JsonResponse
     {
+        $filters = $request->query(key: 'filter');
+        $paginate = $request->query(key: 'paginate') ?? 5;
+
+        $query = Product::query();
+        $query->paginate($paginate);
+        if (!is_null($filters))
+        {
+            if (array_key_exists(key: 'categories', array: $filters)) {
+                $query = $query->whereIn(column: 'category_id', $filters['categories']);
+            }
+            if (!is_null($filters['price_min'])) {
+                $query = $query->where(column: 'price', operator: '>=', value: $filters['price_min']);
+            }
+            if (!is_null($filters['price_max'])) {
+                $query = $query->where(column: 'price', operator: '<=', value: $filters['price_max']);
+            }
+            return response()->json([
+                'data'=> $query->get()
+
+            ]);
+        }
         return view("welcome", [
-            'products' => Product::paginate(10),
-            'categories' =>ProductCategory::orderBy('name', 'ASC')->get()
+            'products' =>$query->get(),
+            'categories' =>ProductCategory::orderBy('name', 'ASC')->get(),
+            'defaultImage' => 'https://via.placeholder.com/240x240/5fa9f8/efefef'
         ]);
     }
 }
