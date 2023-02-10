@@ -26,11 +26,11 @@ class WelcomeController extends Controller
         $paginate = $request->query(key: 'paginate') ?? 5;
 
         $query = Product::query();
-        $query->paginate($paginate);
+
         if (!is_null($filters))
         {
             if (array_key_exists(key: 'categories', array: $filters)) {
-                $query = $query->whereIn(column: 'category_id', $filters['categories']);
+                $query = $query->whereIn(column: 'category_id', values: $filters['categories']);
             }
             if (!is_null($filters['price_min'])) {
                 $query = $query->where(column: 'price', operator: '>=', value: $filters['price_min']);
@@ -38,10 +38,7 @@ class WelcomeController extends Controller
             if (!is_null($filters['price_max'])) {
                 $query = $query->where(column: 'price', operator: '<=', value: $filters['price_max']);
             }
-            return response()->json([
-                'data'=> $query->get()
-
-            ]);
+            return response()->json($query->paginate($paginate));
         }
         return view("welcome", [
             'products' =>$query->get(),
