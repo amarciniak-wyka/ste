@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 order-md-2 col-lg-9">
                 <div class="container-fluid">
-                    <div class="row   mb-5">
+                    <div class="row mb-5">
                         <div class="col-12">
                             <div class="dropdown text-md-left text-center float-md-left mb-3 mt-3 mt-md-0 mb-md-0">
                                 <label class="mr-2">Sort by:</label>
@@ -103,15 +103,13 @@
         </div>
     </div>
 @endsection
+
 @section('javascript')
     const WELCOME_DATA = {
     storagePath: '{{ asset('storage') }}/',
-    defaultImage: '{{ $defaultImage }}',
-    addToCart: '{{ url('cart') }}/',
-    listCart: '{{ url('cart') }}',
-    isGuest: '{{ $isGuest }}'
-    }
+    defaultImage: '{{ $defaultImage }}/'}
 @endsection
+
 @section('js-files')
     <script src="{{ asset("js/welcome.js") }}"></script>
 @endsection
