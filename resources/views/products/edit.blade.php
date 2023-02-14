@@ -99,16 +99,18 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3 justify-content-center">
-                            <div class="col-md-6">
+                        <div class="row mb-3">
+                            <div class="offset-md-4 col-md-6">
                                 @if(!is_null($product->image_path))
-                                    <img src="{{asset('storage/' . $product->image_path)}}" alt="Zdjęcie produktu">
+                                    <a href="{{ route('products.downloadImage', $product->id) }}">
+                                        <img src="{{asset('storage/' . $product->image_path)}}" alt="Zdjęcie produktu">
+                                    </a>
                                 @endif
                             </div>
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 float-right">
                                 <button type="submit" class="btn btn-primary">
                                     {{__('shop.button.save')}}
                                 </button>
