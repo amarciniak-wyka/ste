@@ -11,6 +11,7 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="cart_container">
+                            <div class="cart_title">Koszyk<small> ({{ $cart->getItems()->count() }}) </small></div>
                             <form action="{{ route('orders.store') }}" method="POST" id="order-form">
                                 @csrf
                                 <div class="cart_items">
@@ -65,7 +66,7 @@
 @endsection
 @section('javascript')
     const deleteUrl = "{{ url('cart') }}/";
-    const confirmDelete = "{{ __('shop.messages.delete_confirm') }}";
+    const confirmDelete = "{{ __('shop.messages.delete_confirm') }}/";
 @endsection
 @section('js-files')
     <script src="{{ asset('js/delete.js') }}"></script>
